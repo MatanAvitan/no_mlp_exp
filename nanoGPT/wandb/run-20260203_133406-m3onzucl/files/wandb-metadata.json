@@ -1,0 +1,89 @@
+{
+  "os":  "Linux-5.14.0-611.24.1.el9_7.x86_64-x86_64-with-glibc2.34",
+  "python":  "CPython 3.12.8",
+  "startedAt":  "2026-02-03T11:34:06.067426Z",
+  "args":  [
+    "config/train_no_mlp_12L_16H.py"
+  ],
+  "program":  "/home/nlp/matan_avitan/git/no_mlp_exp/nanoGPT/train.py",
+  "codePath":  "train.py",
+  "codePathLocal":  "train.py",
+  "git":  {
+    "remote":  "https://github.com/karpathy/nanoGPT.git",
+    "commit":  "3adf61e154c3fe3fca428ad6bc3818b27a3b8291"
+  },
+  "email":  "matan13av@gmail.com",
+  "root":  "/home/nlp/matan_avitan/git/no_mlp_exp/nanoGPT",
+  "host":  "hpc8l4-01",
+  "executable":  "/home/nlp/matan_avitan/.conda/envs/py312/bin/python",
+  "cpu_count":  64,
+  "cpu_count_logical":  128,
+  "gpu":  "NVIDIA L4",
+  "gpu_count":  2,
+  "disk":  {
+    "/":  {
+      "total":  "7667550519296",
+      "used":  "780587765760"
+    }
+  },
+  "memory":  {
+    "total":  "472543903744"
+  },
+  "gpu_nvidia":  [
+    {
+      "name":  "NVIDIA L4",
+      "memoryTotal":  "24152899584",
+      "cudaCores":  7424,
+      "architecture":  "Ada",
+      "uuid":  "GPU-3f9e5133-cb7f-8f33-5847-b8b6ddb7bdb2"
+    },
+    {
+      "name":  "NVIDIA L4",
+      "memoryTotal":  "24152899584",
+      "cudaCores":  7424,
+      "architecture":  "Ada",
+      "uuid":  "GPU-2eaa0192-4d4c-ea97-400b-4c47ae37a5d8"
+    }
+  ],
+  "cudaVersion":  "13.1",
+  "slurm":  {
+    "cluster_name":  "slurm-biu",
+    "conf":  "/var/spool/slurmd/conf-cache/slurm.conf",
+    "cpus_on_node":  "16",
+    "cpus_per_task":  "16",
+    "gpus_on_node":  "2",
+    "gtids":  "0",
+    "job_account":  "ug_dsi",
+    "job_cpus_per_node":  "16",
+    "job_end_time":  "1770132828",
+    "job_gid":  "1301",
+    "job_gpus":  "0,1",
+    "job_id":  "3047570",
+    "job_name":  "no_mlp_12L_16H",
+    "job_nodelist":  "hpc8l4-01",
+    "job_num_nodes":  "1",
+    "job_partition":  "L4-4h",
+    "job_qos":  "normal",
+    "job_start_time":  "1770118428",
+    "job_uid":  "30607",
+    "job_user":  "matan_avitan",
+    "jobid":  "3047570",
+    "localid":  "0",
+    "mem_per_node":  "131072",
+    "nnodes":  "1",
+    "nodeid":  "0",
+    "nodelist":  "hpc8l4-01",
+    "oom_kill_step":  "0",
+    "prio_process":  "0",
+    "procid":  "0",
+    "restart_count":  "5",
+    "submit_dir":  "/home/nlp/matan_avitan/git/no_mlp_exp",
+    "submit_host":  "slurm-login3",
+    "task_pid":  "3306410",
+    "tasks_per_node":  "1",
+    "topology_addr":  "hpc8l4-01",
+    "topology_addr_pattern":  "node",
+    "tres_per_task":  "cpu=16"
+  },
+  "writerId":  "kdzg12np31rqwjh38ldolsq93krao13k"
+}

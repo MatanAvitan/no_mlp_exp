@@ -1,0 +1,6 @@
+{"time":"2026-02-04T16:20:24.289004282+02:00","level":"INFO","msg":"stream: starting","core version":"0.23.1"}
+{"time":"2026-02-04T16:20:25.126897744+02:00","level":"INFO","msg":"stream: created new stream","id":"mpv0rifk"}
+{"time":"2026-02-04T16:20:25.126986738+02:00","level":"INFO","msg":"handler: started","stream_id":"mpv0rifk"}
+{"time":"2026-02-04T16:20:25.135125326+02:00","level":"INFO","msg":"stream: started","id":"mpv0rifk"}
+{"time":"2026-02-04T16:20:25.135143661+02:00","level":"INFO","msg":"writer: started","stream_id":"mpv0rifk"}
+{"time":"2026-02-04T16:20:25.135153621+02:00","level":"INFO","msg":"sender: started","stream_id":"mpv0rifk"}

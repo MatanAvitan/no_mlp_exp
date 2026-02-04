@@ -1,0 +1,21 @@
+2026-02-04 16:03:47,080 INFO    MainThread:3052520 [wandb_setup.py:_flush():80] Current SDK version is 0.23.1
+2026-02-04 16:03:47,080 INFO    MainThread:3052520 [wandb_setup.py:_flush():80] Configure stats pid to 3052520
+2026-02-04 16:03:47,080 INFO    MainThread:3052520 [wandb_setup.py:_flush():80] Loading settings from /home/nlp/matan_avitan/.config/wandb/settings
+2026-02-04 16:03:47,080 INFO    MainThread:3052520 [wandb_setup.py:_flush():80] Loading settings from /home/nlp/matan_avitan/git/no_mlp_exp/nanoGPT/wandb/settings
+2026-02-04 16:03:47,080 INFO    MainThread:3052520 [wandb_setup.py:_flush():80] Loading settings from environment variables
+2026-02-04 16:03:47,080 INFO    MainThread:3052520 [wandb_init.py:setup_run_log_directory():714] Logging user logs to /home/nlp/matan_avitan/git/no_mlp_exp/nanoGPT/wandb/run-20260204_160347-9q2aqflt/logs/debug.log
+2026-02-04 16:03:47,081 INFO    MainThread:3052520 [wandb_init.py:setup_run_log_directory():715] Logging internal logs to /home/nlp/matan_avitan/git/no_mlp_exp/nanoGPT/wandb/run-20260204_160347-9q2aqflt/logs/debug-internal.log
+2026-02-04 16:03:47,081 INFO    MainThread:3052520 [wandb_init.py:init():841] calling init triggers
+2026-02-04 16:03:47,081 INFO    MainThread:3052520 [wandb_init.py:init():846] wandb.init called with sweep_config: {}
+config: {'out_dir': 'out_no_mlp_24L_16H_1280', 'eval_interval': 2000, 'log_interval': 1, 'eval_iters': 200, 'eval_only': False, 'always_save_checkpoint': True, 'init_from': 'scratch', 'wandb_log': True, 'wandb_project': 'no_mlp_exp', 'wandb_run_name': 'no_mlp_24L_16H_d5120_w1280_4gpu', 'dataset': 'openwebtext', 'gradient_accumulation_steps': 4, 'batch_size': 28, 'block_size': 1024, 'n_layer': 24, 'n_head': 16, 'n_embd': 1280, 'dropout': 0.0, 'bias': False, 'use_no_mlp': True, 'value_dim': 5120, 'learning_rate': 0.0002, 'max_iters': 600000, 'weight_decay': 0.1, 'beta1': 0.9, 'beta2': 0.95, 'grad_clip': 1.0, 'decay_lr': True, 'warmup_iters': 2000, 'lr_decay_iters': 600000, 'min_lr': 2e-05, 'backend': 'nccl', 'device': 'cuda', 'dtype': 'bfloat16', 'compile': True, 'v_head_dim': 320, 'head_dim': 80, 'd_mlp': 5120, '_wandb': {}}
+2026-02-04 16:03:47,081 INFO    MainThread:3052520 [wandb_init.py:init():889] starting backend
+2026-02-04 16:03:47,476 INFO    MainThread:3052520 [wandb_init.py:init():892] sending inform_init request
+2026-02-04 16:03:47,484 INFO    MainThread:3052520 [wandb_init.py:init():900] backend started and connected
+2026-02-04 16:03:47,510 INFO    MainThread:3052520 [wandb_init.py:init():970] updated telemetry
+2026-02-04 16:03:47,521 INFO    MainThread:3052520 [wandb_init.py:init():994] communicating run to backend with 90.0 second timeout
+2026-02-04 16:03:49,521 INFO    MainThread:3052520 [wandb_init.py:init():1041] starting run threads in backend
+2026-02-04 16:03:50,058 INFO    MainThread:3052520 [wandb_run.py:_console_start():2521] atexit reg
+2026-02-04 16:03:50,058 INFO    MainThread:3052520 [wandb_run.py:_redirect():2369] redirect: wrap_raw
+2026-02-04 16:03:50,058 INFO    MainThread:3052520 [wandb_run.py:_redirect():2438] Wrapping output streams.
+2026-02-04 16:03:50,058 INFO    MainThread:3052520 [wandb_run.py:_redirect():2461] Redirects installed.
+2026-02-04 16:03:50,066 INFO    MainThread:3052520 [wandb_init.py:init():1081] run started, returning control to user process

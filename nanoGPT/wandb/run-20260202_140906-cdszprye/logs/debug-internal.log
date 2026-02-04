@@ -1,0 +1,6 @@
+{"time":"2026-02-02T14:09:07.355157532+02:00","level":"INFO","msg":"stream: starting","core version":"0.23.1"}
+{"time":"2026-02-02T14:09:07.803560461+02:00","level":"INFO","msg":"stream: created new stream","id":"cdszprye"}
+{"time":"2026-02-02T14:09:07.804149533+02:00","level":"INFO","msg":"handler: started","stream_id":"cdszprye"}
+{"time":"2026-02-02T14:09:07.805286502+02:00","level":"INFO","msg":"stream: started","id":"cdszprye"}
+{"time":"2026-02-02T14:09:07.805323004+02:00","level":"INFO","msg":"writer: started","stream_id":"cdszprye"}
+{"time":"2026-02-02T14:09:07.805326651+02:00","level":"INFO","msg":"sender: started","stream_id":"cdszprye"}

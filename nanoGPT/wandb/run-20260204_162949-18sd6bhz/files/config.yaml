@@ -1,0 +1,167 @@
+_wandb:
+    value:
+        cli_version: 0.23.1
+        e:
+            ag6wbcfkqf515512b5g2ns50ppamg3qd:
+                args:
+                    - config/train_no_mlp_26L_16H_1280_4gpu.py
+                codePath: train.py
+                codePathLocal: train.py
+                cpu_count: 128
+                cpu_count_logical: 128
+                cudaVersion: "13.1"
+                disk:
+                    /:
+                        total: "3832434667520"
+                        used: "415045038080"
+                email: matan13av@gmail.com
+                executable: /home/nlp/matan_avitan/.conda/envs/py312/bin/python
+                git:
+                    commit: 4447b52be05389ba362c1f7fa9b8504f716d6872
+                    remote: https://github.com/karpathy/nanoGPT.git
+                gpu: NVIDIA A100-SXM4-80GB
+                gpu_count: 8
+                gpu_nvidia:
+                    - architecture: Ampere
+                      cudaCores: 6912
+                      memoryTotal: "85899345920"
+                      name: NVIDIA A100-SXM4-80GB
+                      uuid: GPU-d76056a1-a64b-df4c-63e6-486693380c5d
+                    - architecture: Ampere
+                      cudaCores: 6912
+                      memoryTotal: "85899345920"
+                      name: NVIDIA A100-SXM4-80GB
+                      uuid: GPU-f66b39ed-9965-9032-3d6e-36acec2f8a2b
+                    - architecture: Ampere
+                      cudaCores: 6912
+                      memoryTotal: "85899345920"
+                      name: NVIDIA A100-SXM4-80GB
+                      uuid: GPU-130ea43a-d14d-ad32-a080-0d0603dfe760
+                    - architecture: Ampere
+                      cudaCores: 6912
+                      memoryTotal: "85899345920"
+                      name: NVIDIA A100-SXM4-80GB
+                      uuid: GPU-16b54c80-6975-58e2-ca10-84b260b12a69
+                    - architecture: Ampere
+                      cudaCores: 6912
+                      memoryTotal: "85899345920"
+                      name: NVIDIA A100-SXM4-80GB
+                      uuid: GPU-92573f03-7d19-3859-aa51-47d17c902e78
+                    - architecture: Ampere
+                      cudaCores: 6912
+                      memoryTotal: "85899345920"
+                      name: NVIDIA A100-SXM4-80GB
+                      uuid: GPU-9d4e5ced-a020-7d98-1a80-b4e3366b797e
+                    - architecture: Ampere
+                      cudaCores: 6912
+                      memoryTotal: "85899345920"
+                      name: NVIDIA A100-SXM4-80GB
+                      uuid: GPU-eaf71afd-8768-c554-ba8b-91c30295b7b3
+                    - architecture: Ampere
+                      cudaCores: 6912
+                      memoryTotal: "85899345920"
+                      name: NVIDIA A100-SXM4-80GB
+                      uuid: GPU-76b83a0e-d509-563d-d6eb-39a8ce79c95b
+                host: dsinlp01
+                memory:
+                    total: "1081493319680"
+                os: Linux-5.14.0-611.24.1.el9_7.x86_64-x86_64-with-glibc2.34
+                program: /home/nlp/matan_avitan/git/no_mlp_exp/nanoGPT/train.py
+                python: CPython 3.12.8
+                root: /home/nlp/matan_avitan/git/no_mlp_exp/nanoGPT
+                startedAt: "2026-02-04T14:29:49.478144Z"
+                writerId: ag6wbcfkqf515512b5g2ns50ppamg3qd
+        m: []
+        python_version: 3.12.8
+        t:
+            "1":
+                - 1
+                - 105
+            "2":
+                - 1
+                - 105
+            "3":
+                - 13
+                - 16
+            "4": 3.12.8
+            "5": 0.23.1
+            "12": 0.23.1
+            "13": linux-x86_64
+always_save_checkpoint:
+    value: true
+backend:
+    value: nccl
+batch_size:
+    value: 48
+beta1:
+    value: 0.9
+beta2:
+    value: 0.95
+bias:
+    value: false
+block_size:
+    value: 1024
+compile:
+    value: true
+d_mlp:
+    value: 5120
+dataset:
+    value: openwebtext
+decay_lr:
+    value: true
+device:
+    value: cuda
+dropout:
+    value: 0
+dtype:
+    value: bfloat16
+eval_interval:
+    value: 2000
+eval_iters:
+    value: 200
+eval_only:
+    value: false
+grad_clip:
+    value: 1
+gradient_accumulation_steps:
+    value: 4
+head_dim:
+    value: 80
+init_from:
+    value: scratch
+learning_rate:
+    value: 0.0002
+log_interval:
+    value: 1
+lr_decay_iters:
+    value: 600000
+max_iters:
+    value: 600000
+min_lr:
+    value: 2e-05
+mlp_ratio:
+    value: 4
+n_embd:
+    value: 1280
+n_head:
+    value: 16
+n_layer:
+    value: 26
+out_dir:
+    value: out_no_mlp_26L_16H_1280
+use_no_mlp:
+    value: true
+v_head_dim:
+    value: 320
+value_dim:
+    value: 5120
+wandb_log:
+    value: true
+wandb_project:
+    value: no_mlp_exp
+wandb_run_name:
+    value: no_mlp_26L_16H_d5120_w1280_4gpu
+warmup_iters:
+    value: 2000
+weight_decay:
+    value: 0.1

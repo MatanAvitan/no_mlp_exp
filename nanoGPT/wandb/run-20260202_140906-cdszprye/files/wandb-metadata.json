@@ -1,0 +1,88 @@
+{
+  "os":  "Linux-5.14.0-611.16.1.el9_7.x86_64-x86_64-with-glibc2.34",
+  "python":  "CPython 3.12.8",
+  "startedAt":  "2026-02-02T12:09:06.911376Z",
+  "args":  [
+    "config/train_no_mlp_large_6L_16H.py"
+  ],
+  "program":  "/home/nlp/matan_avitan/git/no_mlp_exp/nanoGPT/train.py",
+  "codePath":  "train.py",
+  "codePathLocal":  "train.py",
+  "git":  {
+    "remote":  "https://github.com/karpathy/nanoGPT.git",
+    "commit":  "3adf61e154c3fe3fca428ad6bc3818b27a3b8291"
+  },
+  "email":  "matan13av@gmail.com",
+  "root":  "/home/nlp/matan_avitan/git/no_mlp_exp/nanoGPT",
+  "host":  "hpc2a100-01",
+  "executable":  "/home/nlp/matan_avitan/.conda/envs/py312/bin/python",
+  "cpu_count":  64,
+  "cpu_count_logical":  128,
+  "gpu":  "NVIDIA A100 80GB PCIe",
+  "gpu_count":  2,
+  "disk":  {
+    "/":  {
+      "total":  "1911262019584",
+      "used":  "1340789628928"
+    }
+  },
+  "memory":  {
+    "total":  "539901870080"
+  },
+  "gpu_nvidia":  [
+    {
+      "name":  "NVIDIA A100 80GB PCIe",
+      "memoryTotal":  "85899345920",
+      "cudaCores":  6912,
+      "architecture":  "Ampere",
+      "uuid":  "GPU-35be9e88-3e06-7c54-28bd-0b4ee4774def"
+    },
+    {
+      "name":  "NVIDIA A100 80GB PCIe",
+      "memoryTotal":  "85899345920",
+      "cudaCores":  6912,
+      "architecture":  "Ampere",
+      "uuid":  "GPU-28885441-925a-e8c9-6c65-5dd28738afa3"
+    }
+  ],
+  "cudaVersion":  "13.0",
+  "slurm":  {
+    "cluster_name":  "slurm-biu",
+    "conf":  "/var/spool/slurmd/conf-cache/slurm.conf",
+    "cpus_on_node":  "16",
+    "cpus_per_task":  "16",
+    "gpus_on_node":  "2",
+    "gtids":  "0",
+    "job_account":  "ug_dsi",
+    "job_cpus_per_node":  "16",
+    "job_end_time":  "1770048530",
+    "job_gid":  "1301",
+    "job_gpus":  "0,1",
+    "job_id":  "3047465",
+    "job_name":  "no_mlp_large",
+    "job_nodelist":  "hpc2a100-01",
+    "job_num_nodes":  "1",
+    "job_partition":  "A100-4h",
+    "job_qos":  "normal",
+    "job_start_time":  "1770034130",
+    "job_uid":  "30607",
+    "job_user":  "matan_avitan",
+    "jobid":  "3047465",
+    "localid":  "0",
+    "mem_per_node":  "262144",
+    "nnodes":  "1",
+    "nodeid":  "0",
+    "nodelist":  "hpc2a100-01",
+    "oom_kill_step":  "0",
+    "prio_process":  "0",
+    "procid":  "0",
+    "submit_dir":  "/home/nlp/matan_avitan/git/no_mlp_exp",
+    "submit_host":  "slurm-login3",
+    "task_pid":  "55748",
+    "tasks_per_node":  "1",
+    "topology_addr":  "hpc2a100-01",
+    "topology_addr_pattern":  "node",
+    "tres_per_task":  "cpu=16"
+  },
+  "writerId":  "2fgps0wko7s89cr6hjl428wg147ns0qe"
+}

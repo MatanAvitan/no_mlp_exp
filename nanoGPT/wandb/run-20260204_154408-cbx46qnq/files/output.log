@@ -1,0 +1,16 @@
+step 0: train loss 10.9837, val loss 10.9820
+iter 0: loss 10.9748, time 52746.77ms, mfu -100.00%
+iter 1: loss 10.9758, time 467.43ms, mfu -100.00%
+iter 2: loss 10.9464, time 1307.49ms, mfu -100.00%
+iter 3: loss 10.9048, time 1506.35ms, mfu -100.00%
+iter 4: loss 10.8561, time 1528.91ms, mfu -100.00%
+iter 5: loss 10.8126, time 1502.03ms, mfu 12.27%
+iter 6: loss 10.7070, time 1523.60ms, mfu 12.26%
+iter 7: loss 10.6439, time 1522.23ms, mfu 12.24%
+iter 8: loss 10.5258, time 1509.89ms, mfu 12.24%
+iter 9: loss 10.4034, time 1505.99ms, mfu 12.24%
+iter 10: loss 10.3113, time 1492.09ms, mfu 12.25%
+iter 11: loss 10.2246, time 1514.32ms, mfu 12.24%
+iter 12: loss 10.1144, time 1522.78ms, mfu 12.23%
+iter 13: loss 10.0982, time 1525.14ms, mfu 12.21%
+iter 14: loss 10.0205, time 1520.30ms, mfu 12.21%
