@@ -9,6 +9,12 @@ Research project exploring a novel transformer architecture that removes the ded
 - Applying GELU activation after attention weighting: `GELU(att @ v) @ W_o`
 - Removing the separate MLP block entirely
 
+## Experiment Goals
+
+- Compare No-MLP attention against vanilla MLP baselines at ~0.5B parameters.
+- Keep comparisons fair: same data, tokens seen, optimizer, LR schedule, sequence length, and eval protocol.
+- Report params, MFU, tokens/sec, memory, and validation loss for each run.
+
 ## Key Files
 
 | File | Purpose |
@@ -25,11 +31,35 @@ Research project exploring a novel transformer architecture that removes the ded
 use_no_mlp = True
 value_dim = None  # Defaults to 4 * n_embd (3072 for n_embd=768)
 
+# Vanilla MLP width control
+mlp_ratio = 4.0  # hidden dim = mlp_ratio * n_embd
+
 # Standard settings
 n_layer = 6
 n_head = 12
 n_embd = 768
 ```
+
+## Comparison Protocol
+
+- Primary comparison: parameter-matched at fixed depth/width. For vanilla, use `mlp_ratio = 3.0` (so `d_mlp = 3 * n_embd`) when No-MLP uses `value_dim = 4 * n_embd`.
+- Secondary comparison: standard vanilla with `mlp_ratio = 4.0` at the same depth/width.
+- Optional compute-matched comparison: keep `mlp_ratio = 4.0` and equalize total FLOPs by adjusting steps or model size.
+- Keep batch, tokens seen, `block_size`, optimizer, and eval settings identical across runs.
+- Prefer head_dim-friendly widths (e.g., `n_embd=1280` with `n_head=16` gives head_dim=80).
+
+## KV Cache Implications
+
+- Expanded V acts as the first half of the MLP, so caching V reuses that compute across decoding steps.
+- This can improve per-token latency at long contexts by removing the separate MLP and avoiding repeated V-side expansion.
+- Tradeoff: larger KV cache increases memory footprint and bandwidth pressure; speedups depend on kernel efficiency.
+- Best gains show up at long sequence lengths; short contexts can become bandwidth-bound.
+
+## Recent Findings (Local A100 4x)
+
+- 26L/16H/1280 No-MLP is ~490.6M params and reaches ~32% MFU with high micro-batch sizes.
+- batch_size=46, grad_accum=4 sustains ~79GB/GPU on 80GB A100s without OOM.
+- batch_size=48 OOMs during compilation (~+4.6GB needed).
 
 ## Compute Resources
 
