@@ -56,6 +56,7 @@ class CausalSelfAttention(nn.Module):
             self.c_proj = nn.Linear(self.value_dim, config.n_embd, bias=True)
             # Activation for MLP-like behavior
             self.activation = nn.GELU()
+            self.pre_attn_activation = getattr(config, 'pre_attn_activation', True)
         else:
             # Standard attention
             self.c_attn = nn.Linear(config.n_embd, 3 * config.n_embd, bias=config.bias)
@@ -92,6 +93,8 @@ class CausalSelfAttention(nn.Module):
             qk = self.c_attn_qk(x)
             q, k = qk.split(self.n_embd, dim=2)
             v = self.c_attn_v(x)  # W_v with bias
+            if self.pre_attn_activation:
+                v = self.activation(v)  # GELU before attention
             head_dim = C // self.n_head
             v_head_dim = self.value_dim // self.n_head
             k = k.view(B, T, self.n_head, head_dim).transpose(1, 2)  # (B, nh, T, hs)
@@ -136,8 +139,8 @@ class CausalSelfAttention(nn.Module):
             y = (
                 y.transpose(1, 2).contiguous().view(B, T, self.value_dim)
             )  # (B, T, value_dim)
-            # Apply activation for MLP-like behavior: Activation(x_i * a_i * W_v)
-            y = self.activation(y)
+            if not self.pre_attn_activation:
+                y = self.activation(y)  # GELU after attention (legacy)
         else:
             y = y.transpose(1, 2).contiguous().view(B, T, C)  # (B, T, n_embd)
 
@@ -196,6 +199,7 @@ class GPTConfig:
     value_dim: int = (
         None  # If None, defaults to 4 * n_embd (like original MLP expansion)
     )
+    pre_attn_activation: bool = True  # Apply GELU to values before attention (vs after)
 
 
 class GPT(nn.Module):

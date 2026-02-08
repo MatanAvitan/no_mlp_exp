@@ -58,6 +58,7 @@ mlp_ratio = 4.0  # hidden dim = mlp_ratio * n_embd
 # no-MLP attention variant
 use_no_mlp = False
 value_dim = None  # if None, defaults to 4 * n_embd inside the model
+pre_attn_activation = True  # apply GELU to values before attention (vs after)
 # adamw optimizer
 learning_rate = 6e-4  # max learning rate
 max_iters = 600000  # total number of training iterations
@@ -190,6 +191,7 @@ model_args = dict(
     mlp_ratio=mlp_ratio,
     use_no_mlp=use_no_mlp,
     value_dim=value_dim,
+    pre_attn_activation=pre_attn_activation,
 )  # start with model_args from command line
 if init_from == "scratch":
     # init a new model from scratch
@@ -210,7 +212,7 @@ elif init_from == "resume":
     checkpoint_model_args = checkpoint["model_args"]
     # force these config attributes to be equal otherwise we can't even resume training
     # the rest of the attributes (e.g. dropout) can stay as desired from command line
-    for k in ["n_layer", "n_head", "n_embd", "block_size", "bias", "vocab_size"]:
+    for k in ["n_layer", "n_head", "n_embd", "block_size", "bias", "vocab_size", "use_no_mlp", "value_dim"]:
         model_args[k] = checkpoint_model_args[k]
     # create the model
     gptconf = GPTConfig(**model_args)

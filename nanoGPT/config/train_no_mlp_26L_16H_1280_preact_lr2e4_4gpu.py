@@ -1,8 +1,9 @@
-# 26-layer, 16-head vanilla transformer configuration (parameter-matched)
-# n_embd = 1280, d_mlp = 3 * n_embd = 3840
-# Tuned for 4x B200
+# 26-layer, 16-head No-MLP transformer with pre-attention GELU (~0.5B params)
+# n_embd = 1280, value_dim = 5120
+# GELU applied to values BEFORE attention (mirrors MLP structure)
+# ABLATION: Original LR=2e-4 to isolate GELU placement effect
 
-out_dir = "out_vanilla_26L_16H_1280_mlp3"
+out_dir = "out_no_mlp_26L_16H_1280_preact_lr2e4"
 eval_interval = 2000
 eval_iters = 200
 log_interval = 1
@@ -11,7 +12,7 @@ always_save_checkpoint = True
 # wandb logging
 wandb_log = True
 wandb_project = "no_mlp_exp"
-wandb_run_name = "vanilla_26L_16H_mlp3_w1280_4gpu"
+wandb_run_name = "no_mlp_26L_16H_preact_lr2e4_4gpu"
 
 # Model configuration
 n_layer = 26
@@ -21,18 +22,19 @@ block_size = 1024
 bias = False
 dropout = 0.0
 
-# Vanilla MLP settings (parameter-matched)
-use_no_mlp = False
-mlp_ratio = 3.0
+# No-MLP specific settings
+use_no_mlp = True
+value_dim = 5120  # 4 * n_embd
+pre_attn_activation = True  # GELU before attention
 
-# Data - Matched to No-MLP config for fair comparison
+# Data - Optimized for 80GB A100s
 dataset = "openwebtext"
 batch_size = 46
 gradient_accumulation_steps = (
     4  # Effective batch size = 46 * 4 = 184 sequences (must be divisible by 4 GPUs)
 )
 
-# Optimizer
+# Optimizer - original LR to test if pre-GELU prevents divergence
 learning_rate = 2e-4
 max_iters = 600000
 weight_decay = 1e-1

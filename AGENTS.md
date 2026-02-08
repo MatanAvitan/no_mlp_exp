@@ -19,10 +19,13 @@ Research project exploring a novel transformer architecture that removes the ded
 
 | File | Purpose |
 |------|---------|
-| `nanoGPT/model.py` | Model with No-MLP architecture support |
+| `nanoGPT/model.py` | Model with No-MLP architecture support (incl. `pre_attn_activation`) |
 | `nanoGPT/train.py` | Training script |
-| `nanoGPT/config/train_no_mlp_6L_12H.py` | 6-layer, 12-head No-MLP config |
-| `submit_no_mlp.sbatch` | SLURM submission script |
+| `nanoGPT/config/train_vanilla_26L_16H_1280_mlp3_4gpu.py` | Vanilla baseline config (~492M params) |
+| `nanoGPT/config/train_no_mlp_26L_16H_1280_preact_lr2e4_4gpu.py` | **Active** No-MLP config (pre-GELU, LR=2e-4) |
+| `nanoGPT/config/train_no_mlp_26L_16H_1280_preact_4gpu.py` | No-MLP config (pre-GELU, LR=6e-5, abandoned) |
+| `nanoGPT/config/train_no_mlp_26L_16H_1280_4gpu.py` | No-MLP config (post-GELU, diverged) |
+| `submit_*.sbatch` | SLURM submission scripts for each config |
 
 ## Architecture Configuration
 
@@ -55,9 +58,53 @@ n_embd = 768
 - Tradeoff: larger KV cache increases memory footprint and bandwidth pressure; speedups depend on kernel efficiency.
 - Best gains show up at long sequence lengths; short contexts can become bandwidth-bound.
 
-## Recent Findings (Local A100 4x)
+## Current 0.5B Experiment Results (B200 4x)
 
-- 26L/16H/1280 No-MLP is ~490.6M params and reaches ~32% MFU with high micro-batch sizes.
+### Architecture
+- **Vanilla**: 26L/16H/1280, mlp_ratio=3 → **491.75M** params
+- **No-MLP**: 26L/16H/1280, value_dim=5120 → **491.88M** params (0.03% difference)
+- batch_size=46, grad_accum=4, block_size=1024 → 188,416 tokens/iter
+
+### WandB Runs
+
+| Run ID | Config | Notes |
+|--------|--------|-------|
+| `byqos4ra` | Vanilla, mlp_ratio=3, LR=2e-4 | Baseline, running well through 60K+ steps |
+| `ih71d05w` | No-MLP, post-GELU, LR=2e-4 | **Diverged at step 18K** |
+| `qm3u6o48` | No-MLP, pre-GELU, LR=6e-5 | Cancelled — LR too low, far behind |
+| `63s4jxhe` | No-MLP, pre-GELU, LR=2e-4 | **Active** — stable through 24K+, no divergence |
+
+### Val Loss Comparison
+
+| Step | Vanilla (byqos4ra) | Post-GELU LR=2e-4 (ih71d05w) | Pre-GELU LR=6e-5 (qm3u6o48) | Pre-GELU LR=2e-4 (63s4jxhe) |
+|-----:|:---:|:---:|:---:|:---:|
+| 2K | 4.021 | 4.527 | 5.403 | 4.535 |
+| 4K | 3.523 | 3.805 | 4.351 | 3.717 |
+| 8K | 3.248 | 3.405 | 3.683 | 3.362 |
+| 12K | 3.134 | 3.252 | 3.457 | 3.220 |
+| 16K | 3.070 | 3.175 | — | 3.149 |
+| **18K** | **3.037** | **3.172** (stall) | — | **3.111** |
+| 20K | 3.010 | 3.193 (diverge) | — | 3.081 |
+| 24K | 2.982 | 3.217 (worsening) | — | 3.045 |
+
+### Key Findings
+
+1. **Pre-attention GELU fixes divergence.** Post-GELU (ih71d05w) diverged at step 18K with LR=2e-4. Pre-GELU (63s4jxhe) with the same LR sails through 24K+ with smooth descent. The instability was caused by GELU placement, not learning rate.
+2. **Pre-GELU is better even before divergence.** At step 16K (before post-GELU diverges): pre-GELU=3.149 vs post-GELU=3.175. Pre-GELU isn't just more stable — it learns faster.
+3. **LR=6e-5 was far too conservative.** Reducing LR 3.3x killed training speed (3.683 at 8K vs 3.362) with no benefit.
+4. **Gap to vanilla is narrowing.** Val loss gap went from 0.114 (step 8K) → 0.063 (step 24K), nearly halving over training.
+
+### Architecture Note: Pre-Attention GELU
+
+The No-MLP architecture applies GELU activation to expanded values. Two placements were tested:
+- **Post-attention** (original): `output = GELU(softmax(QK^T/√d) @ V) @ W_o` — diverges at high LR
+- **Pre-attention** (current): `output = softmax(QK^T/√d) @ GELU(V) @ W_o` — stable, better performance
+
+Pre-attention GELU mirrors the MLP structure more faithfully: the nonlinearity acts on projected features before mixing, rather than after attention-weighted combination. Set `pre_attn_activation = True` in config.
+
+## Historical Findings (Local A100 4x)
+
+- 26L/16H/1280 No-MLP reaches ~32% MFU with high micro-batch sizes on A100.
 - batch_size=46, grad_accum=4 sustains ~79GB/GPU on 80GB A100s without OOM.
 - batch_size=48 OOMs during compilation (~+4.6GB needed).
 

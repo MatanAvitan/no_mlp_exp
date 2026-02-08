@@ -60,6 +60,32 @@ configs = [
             value_dim=8192,
         ),
     ),
+    (
+        "Vanilla 0.5B mlp3 (26L 16H 1280)",
+        GPTConfig(
+            n_layer=26,
+            n_head=16,
+            n_embd=1280,
+            vocab_size=50304,
+            block_size=1024,
+            bias=False,
+            use_no_mlp=False,
+            mlp_ratio=3.0,
+        ),
+    ),
+    (
+        "No-MLP 0.5B (26L 16H 1280)",
+        GPTConfig(
+            n_layer=26,
+            n_head=16,
+            n_embd=1280,
+            vocab_size=50304,
+            block_size=1024,
+            bias=False,
+            use_no_mlp=True,
+            value_dim=5120,
+        ),
+    ),
 ]
 
 for name, config in configs:
